@@ -1,13 +1,22 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args:
-      - 'build'
-      - '-t'
-      - 'gcr.io/engaged-plasma-389007/lux4899/test'
-      - '.'
+    args: ['build', '-t', 'gcr.io/engaged-plasma-389007/lux4899/test:$SHORT_SHA', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/engaged-plasma-389007/lux4899/test']
+    args: ['push', 'gcr.io/engaged-plasma-389007/lux4899/test:$SHORT_SHA']
   - name: 'gcr.io/cloud-builders/npm'
     args: ['install']
   - name: 'gcr.io/cloud-builders/npm'
     args: ['test']
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      - 'apply'
+      - '-f'
+      - 'deployment.yaml'
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE= australia-southeast1'
+      - 'CLOUDSDK_CONTAINER_CLUSTER= usermicroservice-cluster-1'
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      - 'apply'
+      - '-f'
+      - 'service.yaml'
