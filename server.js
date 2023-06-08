@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 let users = [
-    {id:1 , name:'Lakshya'},
+    {id:1 , name:'John'},
     {id:2 , name:'Peter'},
     {id:3 , name:'Steve'}
 ];

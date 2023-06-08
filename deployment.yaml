@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: usermicroservice
-        image: gcr.io/engaged-plasma-389007/lux4899/test
+        image: gcr.io/engaged-plasma-389007/lux4899/test:2
         ports:
         - containerPort: 8080
         imagePullPolicy: IfNotPresent
